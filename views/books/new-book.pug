@@ -1,0 +1,21 @@
+extends ../layout
+
+block content 
+  h1= title 
+  form(action="POST")
+    p
+      label(for = 'bookTitle') Title 
+      input(type="text" name="title" id="bookTitle")
+    p
+      label(for = 'bookAuthor') Author 
+      input(type="text" name="author" id="bookAuthor")
+    p
+      label(for = 'bookGenre') Genre 
+      input(type="text" name="genre" id="bookGenre")
+    p
+      label(for = 'bookYear') Year 
+      input(type="text" name="year" id="bookYear")
+    p 
+      input(type="submit" value="Create New Book")
+    p 
+      a(class="button" href="/books") Cancel

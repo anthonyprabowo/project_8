@@ -11,7 +11,7 @@ const sequelize = new Sequelize({
 const error = require('./error');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const bookRouter = require('./routes/routes');
 
 var app = express();
 
@@ -42,7 +42,7 @@ app.use('/', indexRouter);
 // app.use('/', () =>  {
 //   throw Error('whoops');
 // })
-app.use('/users', usersRouter);
+app.use('/books', bookRouter);
 
 // error handler
 app.use(error.fourohfour);
