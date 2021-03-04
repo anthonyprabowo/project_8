@@ -2,7 +2,7 @@ extends ../layout
 
 block content 
   h1= title 
-  form(action="POST")
+  form(action="/books" method="POST")
     p
       label(for = 'bookTitle') Title 
       input(type="text" name="title" id="bookTitle")

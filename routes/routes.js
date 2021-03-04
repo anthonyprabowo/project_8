@@ -16,6 +16,7 @@ const asyncHandler = (cb) => {
 // BOOKS GET ROUTE
 router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAll();
+  console.log(books);
   res.render('books/index', { books, title: "Books"});
 }))
 
@@ -25,15 +26,17 @@ router.get('/new', asyncHandler(async (req, res) => {
 }))
 
 // POST ROUTE FOR CREATING BOOKS
-router.post('/new', asyncHandler(async (req, res) => {
-  const book = await Book.create(req.body);
+router.post('/', asyncHandler(async (req, res) => {
+  console.log(req.body);
   res.redirect('/')
 }))
 
-// // GET INDIVIDUAL BOOK
-// router.get('/:id', asyncHandler(async (req, res) => {
-//   res.render('update-book')
-// }))
+// GET INDIVIDUAL BOOK
+router.get('/:id', asyncHandler(async (req, res) => {
+  res.render('books/update-book', {title: "Update Book"})
+}))
+
+
 
 // router.post('/:id', asyncHandler(async (req, res) => {
 //   res.redirect('/books');
