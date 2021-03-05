@@ -2,19 +2,20 @@ extends ../layout
 
 block content 
   h1= title 
+  include errors
   form(action="/books" method="POST")
     p
       label(for = 'bookTitle') Title 
-      input(type="text" name="title" id="bookTitle")
+      input(type="text" name="title" id="bookTitle" value=book.title)
     p
       label(for = 'bookAuthor') Author 
-      input(type="text" name="author" id="bookAuthor")
+      input(type="text" name="author" id="bookAuthor" value=book.author)
     p
       label(for = 'bookGenre') Genre 
-      input(type="text" name="genre" id="bookGenre")
+      input(type="text" name="genre" id="bookGenre" value=book.genre)
     p
       label(for = 'bookYear') Year 
-      input(type="text" name="year" id="bookYear")
+      input(type="text" name="year" id="bookYear" value=book.year)
     p 
       input(type="submit" value="Create New Book")
     p 
