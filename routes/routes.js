@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models').Book;
+const { Op } = require("sequelize");
 const pageSize = 5;
+let pages;
+let totalBooks;
 
 // async handler function to wrap each routes
 const asyncHandler = (cb) => {
@@ -28,7 +31,10 @@ const paginate = (query, { page, pageSize }) => {
 
 // BOOKS GET ROUTE
 router.get('/pages/:id', asyncHandler(async (req, res) => {
-  const page = req.params.id - 1
+  const page = req.params.id - 1;
+  const current = req.params.id;
+  totalBooks = await Book.findAll();
+  const route = `/books/pages/${current}`
   const books = await Book.findAll(
     paginate (
       {
@@ -37,8 +43,62 @@ router.get('/pages/:id', asyncHandler(async (req, res) => {
       {page, pageSize}
     )
   );
-  res.render('books/index', { books, title: "Books"});
+  pages = Math.ceil(totalBooks.length / pageSize)
+  res.render('books/index', 
+  { books, 
+    title: "Books", 
+    current,
+    pages,
+    route
+  });
 }));
+
+// SEARCH POST ROUTE
+router.post('/pages/:id', (req, res) => {
+  const query = req.body.search
+  res.redirect('/books/search?q=' + query)
+})
+
+router.get('/search', asyncHandler(async (req, res) => {
+  const query = req.query.q;
+  console.log(query);
+  const books = await Book.findAll( 
+      {
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.like]: '%' + query + '%'
+              }
+            },
+            {
+              author: {
+                [Op.like]: '%' + query + '%'
+              }
+            },
+            {
+              genre: {
+                [Op.like]: '%' + query + '%'
+              }
+            },
+            {
+              year: {
+                [Op.like]: '%' + query + '%'
+              }
+            },
+          ]
+        }
+      }
+  )
+  console.log(books);
+  res.render('books/search', {title: "Search Result", books})
+}))
+
+// SEARCH POST ROUTE FROM SEARCH
+router.post('/search', (req, res) => {
+  const query = req.body.search
+  res.redirect('/books/search?q=' + query);
+})
 
 // NEW BOOK GET ROUTE
 router.get('/new', asyncHandler(async (req, res) => {
@@ -46,7 +106,7 @@ router.get('/new', asyncHandler(async (req, res) => {
 }));
 
 // POST ROUTE FOR CREATING BOOKS
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/new', asyncHandler(async (req, res) => {
   let book;
   try {
     book = await Book.create(req.body)

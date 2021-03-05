@@ -95,3 +95,69 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+
+a.pageActive {
+  background-color: #005b96;
+}
+
+a.pageActive:hover {
+  background-color: #2ab7ca; 
+}
+
+.buttonPage {
+  margin-right: 5px;
+}
+
+div.search-and-create {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Style the submit button */
+form.search {
+  margin-left: 20%;
+}
+
+form.search-result {
+  margin-left: 0;
+  display: flex;
+  -ms-flex-align: start;
+}
+
+form.search button {
+  float: right;
+  width: 50px;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: right;
+  width: 250px;
+  height: 20px;
+  background: #f1f1f1;
+  margin: 0;
+}
+
+
+
+form.search button:hover {
+  background: #0b7dda;
+}
+
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}

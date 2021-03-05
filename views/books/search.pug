@@ -1,0 +1,11 @@
+extends ../layout
+
+block content 
+    h1= title
+    form(class="search search-result" action="/books/search" method="POST" style="max-width: 350px")
+      input(type="text" placeholder="Search.." name="search")
+      button(type='submit')
+              i.fa.fa-search
+    include table
+    p 
+        a(class="button" href="/books/pages/1") Home

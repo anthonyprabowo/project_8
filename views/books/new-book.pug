@@ -3,7 +3,7 @@ extends ../layout
 block content 
   h1= title 
   include errors
-  form(action="/books" method="POST")
+  form(action="/books/new" method="POST")
     p
       label(for = 'bookTitle') Title 
       input(type="text" name="title" id="bookTitle" value=book.title)
@@ -19,4 +19,4 @@ block content
     p 
       input(type="submit" value="Create New Book")
     p 
-      a(class="button" href="/books") Cancel
+      a(class="button" href="/books/pages/1") Cancel
