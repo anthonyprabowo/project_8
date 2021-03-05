@@ -6,7 +6,7 @@ console.log(Book);
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-  res.redirect('/books')
+  res.redirect('/books/pages/1')
 });
 
 module.exports = router;
