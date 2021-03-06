@@ -14,11 +14,11 @@ const generalError = (err, req, res, next) => {
     console.log(status);
   }
   if(status === 404) {
-    console.log(err.message);
     res.render('books/page-not-found', {error: err, status});
   } else {
     err.message = "Oops! something wrong with our server :(";
-    res.render('error', {error: err, status});
+    err.name = "Server Error!";
+    res.render('books/page-not-found', {error: err, status});
   }
 }
 

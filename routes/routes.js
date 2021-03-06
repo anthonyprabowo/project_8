@@ -18,6 +18,7 @@ const asyncHandler = (cb) => {
 };
 
 // pagination function
+// @return object with list of query, page offset and page limit
 const paginate = (query, { page, pageSize }) => {
   const offset = page * pageSize;
   const limit = pageSize;
