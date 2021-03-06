@@ -9,6 +9,8 @@ const sequelize = new Sequelize({
   storage: 'library.db'
 });
 const error = require('./error');
+
+var indexRouter = require('./routes/index');
 const bookRouter = require('./routes/routes');
 
 var app = express();
@@ -34,6 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   }
 // })();
 
+
+
+app.use('/', indexRouter);
 // app.use('/', () =>  {
 //   throw Error('whoops');
 // })
